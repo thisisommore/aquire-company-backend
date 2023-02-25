@@ -3,7 +3,9 @@ package api
 
 import (
 	"template-app/api/auth"
-	"template-app/api/publish"
+	"template-app/api/getcompany"
+	pasetomiddleware "template-app/api/middleware/auth/paseto"
+	"template-app/api/update"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +15,8 @@ func ApplyRoutes(r *gin.Engine) {
 	api := r.Group("/api")
 	{
 		auth.ApplyRoutes(api)
-		publish.ApplyRoutes(api)
+		getcompany.ApplyRoutes(api)
+		api.Use(pasetomiddleware.PASETO)
+		update.ApplyRoutes(api)
 	}
 }

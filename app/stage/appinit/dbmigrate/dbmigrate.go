@@ -2,7 +2,7 @@
 package dbmigrate
 
 import (
-	"template-app/models/sitemodel"
+	"template-app/models/company"
 	"template-app/pkg/store"
 
 	"github.com/TheLazarusNetwork/go-helpers/logo"
@@ -11,7 +11,7 @@ import (
 func Migrate() {
 	db := store.DB
 	err := db.AutoMigrate(
-		&sitemodel.Site{},
+		&company.Company{},
 	)
 	if err != nil {
 		logo.Fatalf("failed to migrate models into database: %s", err)

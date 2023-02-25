@@ -2,7 +2,7 @@
 package pasetoclaims
 
 import (
-	"template-app/models/user"
+	"template-app/models/company"
 	"template-app/pkg/store"
 	"time"
 
@@ -23,7 +23,7 @@ func (c CustomClaims) Valid() error {
 	if err := c.RegisteredClaims.Valid(); err != nil {
 		return err
 	}
-	err := db.Model(&user.User{}).Where("email_id = ?", c.EmailId).First(&user.User{}).Error
+	err := db.Model(&company.Company{}).Where("email_id = ?", c.EmailId).First(&company.Company{}).Error
 	return err
 }
 

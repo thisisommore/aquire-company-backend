@@ -5,7 +5,7 @@ import (
 	"errors"
 	"net/http"
 	"strings"
-	"template-app/models/user/usermethods"
+	"template-app/models/company/companymethods"
 	"template-app/pkg/paseto"
 	"template-app/pkg/supabase"
 
@@ -17,7 +17,7 @@ import (
 
 // ApplyRoutes applies router to gin Router
 func ApplyRoutes(r *gin.RouterGroup) {
-	g := r.Group("/supabase")
+	g := r.Group("/auth")
 	{
 		g.POST("", supabaseAuth)
 	}
@@ -27,7 +27,7 @@ func supabaseAuth(c *gin.Context) {
 	var body AuthRequest
 	err := c.BindJSON(&body)
 	if err != nil {
-		httpo.NewErrorResponse(http.StatusBadRequest, "failed to validate body").
+		httpo.NewErrorResponse(http.StatusBadRequest, err.Error()).
 			Send(c, http.StatusBadRequest)
 		return
 	}
@@ -43,10 +43,10 @@ func supabaseAuth(c *gin.Context) {
 		return
 	}
 
-	_, err = usermethods.Get(sbUser.Email)
+	_, err = companymethods.Get(sbUser.Email)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			err = usermethods.Add(sbUser.Email)
+			err = companymethods.Add(sbUser.Email)
 			if err != nil {
 				logo.Errorf("failed to add user into database: %s", err)
 				httpo.NewErrorResponse(500, "failed to verify and get paseto").Send(c, 500)
