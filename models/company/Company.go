@@ -5,7 +5,7 @@ package company
 type Company struct {
 	ProfileUrl           string `json:"profileUrl"`
 	EmailId              string `json:"emailId" gorm:"primaryKey;not null"`
-	Name                 string `json:"name" gorm:"unique"`
+	Name                 string `json:"name"`
 	Price                int    `json:"price"`
 	OpenToAquire         *bool  `json:"openToAquire"`
 	Domain               string `json:"domain"`
