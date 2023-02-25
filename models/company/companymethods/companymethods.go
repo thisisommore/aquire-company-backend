@@ -12,9 +12,10 @@ import (
 type sortBy string
 
 const (
-	SORT_BY_PRICE sortBy = "price"
-	SORT_BY_USERS sortBy = "users"
-	SORT_BY_NONE  sortBy = "none"
+	SORT_BY_PRICE               sortBy = "price"
+	SORT_BY_USERS               sortBy = "users"
+	SORT_BY_CURRENT_YEAR_PROFIT sortBy = "current_year_profit"
+	SORT_BY_NONE                sortBy = "none"
 )
 
 // Add adds user with given Email id to database
@@ -66,6 +67,9 @@ func GetCompaniesOpenToHire(offSet int, take int, sortBy sortBy) (companies []co
 	db := store.DB
 	companyModel := db.Limit(take).Offset(offSet).Model(&company.Company{}).Not("name = ?", "").
 		Not("price = 0").
+		Not("current_year_profit = 0").
+		Not("product = ?", "").
+		Not("domain = ?", "").
 		Where("open_to_aquire = ?", true)
 	if sortBy != SORT_BY_NONE {
 		orderString := fmt.Sprintf("%s desc", sortBy)

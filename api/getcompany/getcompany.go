@@ -32,6 +32,8 @@ func GetCompany(c *gin.Context) {
 		sortBy = companymethods.SORT_BY_PRICE
 	case "users":
 		sortBy = companymethods.SORT_BY_USERS
+	case "current_year_profile":
+		sortBy = companymethods.SORT_BY_CURRENT_YEAR_PROFIT
 	}
 
 	companies, err := companymethods.GetCompaniesOpenToHire(*reqQuery.StartOffSet, 10, sortBy)

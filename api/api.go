@@ -4,6 +4,7 @@ package api
 import (
 	"template-app/api/auth"
 	"template-app/api/getcompany"
+	"template-app/api/getmycompany"
 	pasetomiddleware "template-app/api/middleware/auth/paseto"
 	"template-app/api/update"
 
@@ -18,5 +19,6 @@ func ApplyRoutes(r *gin.Engine) {
 		getcompany.ApplyRoutes(api)
 		api.Use(pasetomiddleware.PASETO)
 		update.ApplyRoutes(api)
+		getmycompany.ApplyRoutes(api)
 	}
 }

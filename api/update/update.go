@@ -28,9 +28,13 @@ func update(c *gin.Context) {
 	}
 	emailId := c.GetString(pasetomiddleware.EmailIdInContext)
 	if err = companymethods.Update(emailId, company.Company{
-		Name:         body.Name,
-		OpenToAquire: body.OpenToAquire,
-		Price:        body.Price,
+		Name:              body.Name,
+		OpenToAquire:      body.OpenToAquire,
+		Price:             body.Price,
+		Product:           body.Product,
+		CurrentYearProfit: body.CurrentYearProfit,
+		Domain:            body.Domain,
+		ProfileUrl:        body.ProfileUrl,
 	}); err != nil {
 		httpo.NewErrorResponse(http.StatusInternalServerError, err.Error()).
 			SendD(c)
