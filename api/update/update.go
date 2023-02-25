@@ -46,6 +46,7 @@ func update(c *gin.Context) {
 		Youtube:              body.Youtube,
 		BuisinessLicenseLink: body.BuisinessLicenseLink,
 		LiveUsersLink:        body.LiveUsersLink,
+		ActiveUsers:          body.ActiveUsers,
 	}); err != nil {
 		httpo.NewErrorResponse(http.StatusInternalServerError, err.Error()).
 			SendD(c)

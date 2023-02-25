@@ -19,4 +19,5 @@ type UpdateRequest struct {
 	Website              string `json:"website"`
 	Youtube              string `json:"youtube"`
 	BuisinessLicenseLink string `json:"businessLicenseLink"`
+	ActiveUsers          int    `json:"activeUsers"`
 }

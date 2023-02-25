@@ -7,7 +7,7 @@ type Company struct {
 	EmailId              string `json:"emailId" gorm:"primaryKey;not null"`
 	Name                 string `json:"name" gorm:"unique"`
 	Price                int    `json:"price"`
-	OpenToAquire         *bool  `json:"openToHire"`
+	OpenToAquire         *bool  `json:"openToAquire"`
 	Domain               string `json:"domain"`
 	Product              string `json:"product"`
 	CurrentYearProfit    int    `json:"currentYearProfit"`
@@ -15,11 +15,12 @@ type Company struct {
 	Owner                string `json:"owner"`
 	Cto                  string `json:"cto"`
 	Address              string `json:"address"`
-	Description          string `json:"Description"`
+	Description          string `json:"description"`
 	NetWorth             int    `json:"networth"`
 	LinkedIn             string `json:"linkedIn"`
 	Website              string `json:"website"`
 	Youtube              string `json:"youtube"`
 	BuisinessLicenseLink string `json:"businessLicenseLink"`
 	LiveUsersLink        string `json:"liveUserLink"`
+	ActiveUsers          int    `json:"activeUsers"`
 }

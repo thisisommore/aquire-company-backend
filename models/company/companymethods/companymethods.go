@@ -6,6 +6,7 @@ import (
 	"template-app/models/company"
 	"template-app/pkg/store"
 
+	"github.com/TheLazarusNetwork/go-helpers/logo"
 	"gorm.io/gorm"
 )
 
@@ -13,7 +14,7 @@ type sortBy string
 
 const (
 	SORT_BY_PRICE               sortBy = "price"
-	SORT_BY_USERS               sortBy = "users"
+	SORT_BY_USERS               sortBy = "active_users"
 	SORT_BY_CURRENT_YEAR_PROFIT sortBy = "current_year_profit"
 	SORT_BY_NONE                sortBy = "none"
 )
@@ -63,7 +64,7 @@ func Get(emailId string) (*company.Company, error) {
 	return &_company, nil
 }
 
-func GetCompaniesOpenToHire(offSet int, take int, sortBy sortBy) (companies []company.Company, err error) {
+func GetCompaniesOpenToAquire(offSet int, take int, sortBy sortBy) (companies []company.Company, err error) {
 	db := store.DB
 	companyModel := db.Limit(take).Offset(offSet).Model(&company.Company{}).Not("name = ?", "").
 		Not("price = 0").
@@ -73,6 +74,7 @@ func GetCompaniesOpenToHire(offSet int, take int, sortBy sortBy) (companies []co
 		Where("open_to_aquire = ?", true)
 	if sortBy != SORT_BY_NONE {
 		orderString := fmt.Sprintf("%s desc", sortBy)
+		logo.Info("max ", orderString)
 		companyModel = companyModel.Order(orderString)
 	}
 	err = companyModel.Find(&companies).Error

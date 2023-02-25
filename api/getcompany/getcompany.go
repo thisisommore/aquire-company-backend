@@ -32,11 +32,11 @@ func GetCompany(c *gin.Context) {
 		sortBy = companymethods.SORT_BY_PRICE
 	case "users":
 		sortBy = companymethods.SORT_BY_USERS
-	case "current_year_profile":
+	case "current_year_profite":
 		sortBy = companymethods.SORT_BY_CURRENT_YEAR_PROFIT
 	}
 
-	companies, err := companymethods.GetCompaniesOpenToHire(*reqQuery.StartOffSet, 10, sortBy)
+	companies, err := companymethods.GetCompaniesOpenToAquire(*reqQuery.StartOffSet, 10, sortBy)
 	if err != nil {
 		httphelper.HandleDBError(err, "failed to fetch companies", c)
 		return
